@@ -11,23 +11,31 @@ Instrucciones:
     6. Imprime los valores de las propiedades.
  */
 
-// interface que define la estructura de un contacto
+/*
+ * Interface que define la estructura de un contacto.
+ * En TypeScript, todas las propiedades declaradas en una interfaz son implícitamente públicas
+ */
+
 interface Contacto {
    nombre: string;
    apellido: string;
    numeroTelefono: string;
 }
 
-// clase que implementa la interface
+// clase que implementa la interface. Uso de una propiedad privada dentro de la clase
 class ContactoClase implements Contacto {
    nombre: string;
    apellido: string;
-   numeroTelefono: string;
+   private _numeroTelefono: string; // utilizar un truco llamado "accessor" (usar con métodos get y set)
 
    constructor(nombre: string, apellido: string, numeroTelefono: string) {
       this.nombre = nombre;
       this.apellido = apellido;
-      this.numeroTelefono = numeroTelefono;
+      this._numeroTelefono = numeroTelefono;
+   }
+   // metodo publico que cumple con la interface para acceder a numeroTelefono (_numeroTelefono en la clase)
+   get numeroTelefono(): string {
+      return this._numeroTelefono; // privado en la clase
    }
 }
 
